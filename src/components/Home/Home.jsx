@@ -6,6 +6,9 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
+            <div className='my-10'>
+                <h1 className='text-center text-4xl font-bold'>Estates</h1>
+            </div>
         </div>
     );
 };

@@ -1,0 +1,218 @@
+[
+    {
+        "id": "1",
+        "image_url": "https://i.ibb.co/ynpsKdk/image01-11zon.jpg",
+        "estate_title": "Oceanfront Luxury Villa",
+        "segment_name": "Beachfront",
+        "description": "A stunning oceanfront villa with breathtaking views, offering unparalleled luxury and comfort.",
+        "price": 3200000,
+        "status": "rent",
+        "area": 3500 ,
+        "location": "Malibu, California",
+        "facilities": [
+            "Living Room",
+            "Swimming Pool",
+            "Kitchen",
+            "Private Beach Access",
+            "Home Theater"
+        ]
+    },
+    {
+        "id": "2",
+        "image_url": "https://i.ibb.co/ykCjsQW/image02-11zon.jpg",
+        "estate_title": "Modern Urban Penthouse",
+        "segment_name": "Penthouse",
+        "description": "A luxurious penthouse in the heart of the city, featuring modern amenities and stunning city views.",
+        "price": 2800000,
+        "status": "sale",
+        "area": 2500 ,
+        "location": "New York City, New York",
+        "facilities": [
+            "Living Room",
+            "Rooftop Terrace",
+            "Kitchen",
+            "Gym",
+            "Jacuzzi"
+        ]
+    },
+    {
+        "id": "3",
+        "image_url": "https://i.ibb.co/CvqX1HN/image03-11zon.jpg",
+        "estate_title": "Private Island Retreat",
+        "segment_name": "Private Island",
+        "description": "A private island estate offering unparalleled privacy, luxury, and natural beauty.",
+        "price": 25000000,
+        "status": "sale",
+        "area": 10000 ,
+        "location": "Bahamas",
+        "facilities": [
+            "Living Room",
+            "Swimming Pool",
+            "Kitchen",
+            "Private Dock",
+            "Helipad"
+        ]
+    },
+    {
+        "id": "4",
+        "image_url": "https://i.ibb.co/QM4mngT/image04-11zon.jpg",
+        "estate_title": "Mountain View Chalet",
+        "segment_name": "Mountain Retreat",
+        "description": "A cozy chalet nestled in the mountains, perfect for those seeking peace and tranquility.",
+        "price": 1500000,
+        "status": "sale",
+        "area": 2000 ,
+        "location": "Aspen, Colorado",
+        "facilities": [
+            "Living Room",
+            "Fireplace",
+            "Kitchen",
+            "Sauna",
+            "Hot Tub"
+        ]
+    },
+    {
+        "id": "5",
+        "image_url": "https://i.ibb.co/hX3x2cM/image05-11zon.jpg",
+        "estate_title": "Luxury Golf Estate",
+        "segment_name": "Golf Estate",
+        "description": "A magnificent estate located on a championship golf course, offering luxury living with golf views.",
+        "price": 4200000,
+        "status": "rent",
+        "area": 4000 ,
+        "location": "Scottsdale, Arizona",
+        "facilities": [
+            "Living Room",
+            "Swimming Pool",
+            "Kitchen",
+            "Golf Course Access",
+            "Wine Cellar"
+        ]
+    },
+    {
+        "id": "6",
+        "image_url": "https://i.ibb.co/4PSMkHp/image06-11zon.jpg",
+        "estate_title": "Exclusive Mansion",
+        "segment_name": "Mansion",
+        "description": "A grand mansion featuring classic architecture, sprawling gardens, and luxurious interiors.",
+        "price": 6800000,
+        "status": "rent",
+        "area": 7000 ,
+        "location": "Beverly Hills, California",
+        "facilities": [
+            "Living Room",
+            "Swimming Pool",
+            "Kitchen",
+            "Library",
+            "Home Theater"
+        ]
+    },
+    {
+        "id": "7",
+        "image_url": "https://i.ibb.co/TYdZd0F/image07-11zon.jpg",
+        "estate_title": "Countryside Villa",
+        "segment_name": "Villa",
+        "description": "A charming villa located in the countryside, ideal for those who appreciate nature and serenity.",
+        "price": 2000000,
+        "status": "rent",
+        "area": 3000 ,
+        "location": "Tuscany, Italy",
+        "facilities": [
+            "Living Room",
+            "Garden",
+            "Kitchen",
+            "Wine Cellar",
+            "Guest House"
+        ]
+    },
+    {
+        "id": "8",
+        "image_url": "https://i.ibb.co/Wv25MzJ/image08-11zon.jpg",
+        "estate_title": "Modern City Apartment",
+        "segment_name": "Apartment",
+        "description": "A sleek and modern apartment in the city center, perfect for urban living with style.",
+        "price": 1200000,
+        "status": "sale",
+        "area": 1500 ,
+        "location": "San Francisco, California",
+        "facilities": [
+            "Living Room",
+            "Balcony",
+            "Kitchen",
+            "Gym",
+            "Concierge"
+        ]
+    },
+    {
+        "id": "9",
+        "image_url": "https://i.ibb.co/0h0FkC8/image09-11zon.jpg",
+        "estate_title": "Lakeside Cottage",
+        "segment_name": "Cottage",
+        "description": "A quaint lakeside cottage offering a peaceful retreat with beautiful water views.",
+        "price":850000,
+        "status": "rent",
+        "area": 1800 ,
+        "location": "Lake Tahoe, California",
+        "facilities": [
+            "Living Room",
+            "Deck",
+            "Kitchen",
+            "Fireplace",
+            "Private Dock"
+        ]
+    },
+    {
+        "id": "10",
+        "image_url": "https://i.ibb.co/L5kCDcc/image10-11zon.jpg",
+        "estate_title": "Historic Colonial Estate",
+        "segment_name": "Colonial Estate",
+        "description": "A beautifully restored colonial estate with historical charm and modern amenities.",
+        "price": 3500000,
+        "status": "rent",
+        "area": 5000 ,
+        "location": "Charleston, South Carolina",
+        "facilities": [
+            "Living Room",
+            "Library",
+            "Kitchen",
+            "Garden",
+            "Pool House"
+        ]
+    },
+    {
+        "id": "11",
+        "image_url": "https://i.ibb.co/p3z8X7H/image11-11zon.jpg",
+        "estate_title": "Ski-in/Ski-out Chalet",
+        "segment_name": "Ski Chalet",
+        "description": "A luxury ski-in/ski-out chalet with direct access to the slopes and modern comforts.",
+        "price": 2800000,
+        "status": "sale",
+        "area": 3200 ,
+        "location": "Whistler, Canada",
+        "facilities": [
+            "Living Room",
+            "Ski Room",
+            "Kitchen",
+            "Hot Tub",
+            "Fireplace"
+        ]
+    },
+    {
+        "id": "12",
+        "image_url": "https://i.ibb.co/LzBtgbX/image12-11zon.jpg",
+        "estate_title": "Luxury Yacht Villa",
+        "segment_name": "Yacht Villa",
+        "description": "An exclusive villa with direct yacht access, offering a unique luxury living experience.",
+        "price": 4500000,
+        "status": "sale",
+        "area": 4500 ,
+        "location": "Miami, Florida",
+        "facilities": [
+            "Living Room",
+            "Swimming Pool",
+            "Kitchen",
+            "Private Dock",
+            "Rooftop Terrace"
+        ]
+    }
+]

@@ -8,6 +8,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from './components/Home/Home.jsx';
+import AllEstates from './components/Estates/AllEstates.jsx';
+import fetchEstatesData from './utility/fetchEstatesData.js';
 
 const router = createBrowserRouter([
   {
@@ -15,7 +17,7 @@ const router = createBrowserRouter([
     element: <App></App>,
     children: [
       { path: "/", element: <Home></Home> },
-      { path: "/estates", element: <h1>Hello This is Estates...</h1> },
+      { path: "/estates", element: <AllEstates></AllEstates>, loader: fetchEstatesData },
       { path: "/contact-us", element: <h1>Hello This is Contact Us...</h1> },
     ],
   },

@@ -26,7 +26,7 @@ const Navbar = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <NavLink to="/" className="text-2xl font-bold text-custom-green-dark">EliteResidences</NavLink>
+                    <NavLink to="/" className="text-3xl font-bold text-custom-green-dark">EliteResidences</NavLink>
                 </div>
                 <div className="navbar-center hidden md:flex">
                     <ul className="menu menu-horizontal px-1 space-x-1">
