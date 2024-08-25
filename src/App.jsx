@@ -3,6 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Shared/Navbar'
 import { Outlet } from 'react-router-dom'
+import Footer from './components/Shared/Footer'
 
 function App() {
   return (
@@ -19,8 +20,8 @@ function App() {
           {/* <ToastContainer /> */}
         </main>
 
-        <footer className="mt-auto bg-base-200 w-full">
-          {/* <Footer></Footer> */}
+        <footer className="mt-auto bg-custom-green-light w-full">
+          <Footer></Footer>
         </footer>
       </div>
     </>

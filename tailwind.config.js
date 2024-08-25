@@ -11,6 +11,7 @@ export default {
         'custom-green-light': '#41B3A2',
         'custom-green-light2': '#E7FBE6',
         'custom-blue-light': '#BDE8CA',
+        'custom-swiper-blue': '#007aff',
       },
     },
   },
