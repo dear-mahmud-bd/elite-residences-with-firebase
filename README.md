@@ -8,5 +8,7 @@
 - Use `Swiper Slider` to make beautiful [banner](https://swiperjs.com/get-started).
 - `Talwind CSS` and it's component library `daisyUI` are used to design the website.
 - Error handling for incorrect routing.
+- Use `firebase` for authentication and authorization.
+
 
 

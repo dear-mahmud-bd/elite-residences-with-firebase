@@ -12,8 +12,9 @@ import AllEstates from './components/Estates/AllEstates.jsx';
 import fetchEstatesData from './utility/fetchEstatesData.js';
 import EstateDetails from './components/Estates/EstateDetails.jsx';
 import NotFound from './components/Shared/NotFound.jsx';
-import SignUp from './components/Accounts/Pages/SignUp.jsx';
-import SignIn from './components/Accounts/Pages/SignIn.jsx';
+import SignUp from './components/SignUpSignIn/SignUp.jsx';
+import SignIn from './components/SignUpSignIn/SignIn.jsx';
+import AuthProvider from './components/providers/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )
