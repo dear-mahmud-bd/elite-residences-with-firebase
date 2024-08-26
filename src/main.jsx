@@ -10,6 +10,8 @@ import {
 import Home from './components/Home/Home.jsx';
 import AllEstates from './components/Estates/AllEstates.jsx';
 import fetchEstatesData from './utility/fetchEstatesData.js';
+import EstateDetails from './components/Estates/EstateDetails.jsx';
+import NotFound from './components/Shared/NotFound.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +20,10 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home></Home> },
       { path: "/estates", element: <AllEstates></AllEstates>, loader: fetchEstatesData },
-      { path: "/contact-us", element: <h1>Hello This is Contact Us...</h1> },
+      { path: "/estates/:id", element: <EstateDetails></EstateDetails>, loader: fetchEstatesData },
+
+      { path: "/contact-agent", element: <h1>Hello This is Contact Agent...</h1> },
+      { path: "*", element: <NotFound></NotFound> },
     ],
   },
 ]);

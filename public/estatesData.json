@@ -1,6 +1,6 @@
 [
     {
-        "id": "1",
+        "id": "1001",
         "image_url": "https://i.ibb.co/ynpsKdk/image01-11zon.jpg",
         "estate_title": "Oceanfront Luxury Villa",
         "segment_name": "Beachfront",
@@ -18,7 +18,7 @@
         ]
     },
     {
-        "id": "2",
+        "id": "1002",
         "image_url": "https://i.ibb.co/ykCjsQW/image02-11zon.jpg",
         "estate_title": "Modern Urban Penthouse",
         "segment_name": "Penthouse",
@@ -36,7 +36,7 @@
         ]
     },
     {
-        "id": "3",
+        "id": "1003",
         "image_url": "https://i.ibb.co/CvqX1HN/image03-11zon.jpg",
         "estate_title": "Private Island Retreat",
         "segment_name": "Private Island",
@@ -54,7 +54,7 @@
         ]
     },
     {
-        "id": "4",
+        "id": "1004",
         "image_url": "https://i.ibb.co/QM4mngT/image04-11zon.jpg",
         "estate_title": "Mountain View Chalet",
         "segment_name": "Mountain Retreat",
@@ -72,7 +72,7 @@
         ]
     },
     {
-        "id": "5",
+        "id": "1005",
         "image_url": "https://i.ibb.co/hX3x2cM/image05-11zon.jpg",
         "estate_title": "Luxury Golf Estate",
         "segment_name": "Golf Estate",
@@ -90,7 +90,7 @@
         ]
     },
     {
-        "id": "6",
+        "id": "1006",
         "image_url": "https://i.ibb.co/4PSMkHp/image06-11zon.jpg",
         "estate_title": "Exclusive Mansion",
         "segment_name": "Mansion",
@@ -108,7 +108,7 @@
         ]
     },
     {
-        "id": "7",
+        "id": "1007",
         "image_url": "https://i.ibb.co/TYdZd0F/image07-11zon.jpg",
         "estate_title": "Countryside Villa",
         "segment_name": "Villa",
@@ -126,7 +126,7 @@
         ]
     },
     {
-        "id": "8",
+        "id": "1008",
         "image_url": "https://i.ibb.co/Wv25MzJ/image08-11zon.jpg",
         "estate_title": "Modern City Apartment",
         "segment_name": "Apartment",
@@ -144,7 +144,7 @@
         ]
     },
     {
-        "id": "9",
+        "id": "1009",
         "image_url": "https://i.ibb.co/0h0FkC8/image09-11zon.jpg",
         "estate_title": "Lakeside Cottage",
         "segment_name": "Cottage",
@@ -162,7 +162,7 @@
         ]
     },
     {
-        "id": "10",
+        "id": "1010",
         "image_url": "https://i.ibb.co/L5kCDcc/image10-11zon.jpg",
         "estate_title": "Historic Colonial Estate",
         "segment_name": "Colonial Estate",
@@ -180,7 +180,7 @@
         ]
     },
     {
-        "id": "11",
+        "id": "1011",
         "image_url": "https://i.ibb.co/p3z8X7H/image11-11zon.jpg",
         "estate_title": "Ski-in/Ski-out Chalet",
         "segment_name": "Ski Chalet",
@@ -198,7 +198,7 @@
         ]
     },
     {
-        "id": "12",
+        "id": "1012",
         "image_url": "https://i.ibb.co/LzBtgbX/image12-11zon.jpg",
         "estate_title": "Luxury Yacht Villa",
         "segment_name": "Yacht Villa",
