@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { CiLogin, CiLogout } from 'react-icons/ci';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     const addClass = isActive =>
@@ -10,6 +10,7 @@ const Navbar = () => {
         <li><NavLink className={({ isActive }) => addClass(isActive)} to="/">Home</NavLink></li>
         <li><NavLink className={({ isActive }) => addClass(isActive)} to="/estates">Estates</NavLink></li>
         <li><NavLink className={({ isActive }) => addClass(isActive)} to="/contact-agent">Contact Agent</NavLink></li>
+        <li><NavLink className={({ isActive }) => addClass(isActive)} to="/signup">Sign Up</NavLink></li>
     </>
 
     return (
@@ -26,7 +27,7 @@ const Navbar = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <NavLink to="/" className="text-3xl font-bold text-custom-green-dark">EliteResidences</NavLink>
+                    <Link to="/" className="text-3xl font-bold text-custom-green-dark">EliteResidences</Link>
                 </div>
                 <div className="navbar-center hidden md:flex">
                     <ul className="menu menu-horizontal px-1 space-x-1">
@@ -34,9 +35,9 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
-                    <button className="btn bg-custom-green-light hover:bg-custom-green-dark text-white font-semibold">
+                    <Link to='/signin' className="btn bg-custom-green-light hover:bg-custom-green-dark text-white font-semibold">
                         Sign In<CiLogin className='text-2xl' />
-                    </button>
+                    </Link>
                     <div className="dropdown dropdown-hover dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-20 rounded-full ring ring-offset-2 ring-custom-green-light">

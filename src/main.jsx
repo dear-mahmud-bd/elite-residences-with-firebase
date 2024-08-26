@@ -12,6 +12,8 @@ import AllEstates from './components/Estates/AllEstates.jsx';
 import fetchEstatesData from './utility/fetchEstatesData.js';
 import EstateDetails from './components/Estates/EstateDetails.jsx';
 import NotFound from './components/Shared/NotFound.jsx';
+import SignUp from './components/Accounts/Pages/SignUp.jsx';
+import SignIn from './components/Accounts/Pages/SignIn.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,9 @@ const router = createBrowserRouter([
       { path: "/", element: <Home></Home> },
       { path: "/estates", element: <AllEstates></AllEstates>, loader: fetchEstatesData },
       { path: "/estates/:id", element: <EstateDetails></EstateDetails>, loader: fetchEstatesData },
+
+      { path: "/signup", element: <SignUp></SignUp> },
+      { path: "/signin", element: <SignIn></SignIn> },
 
       { path: "/contact-agent", element: <h1>Hello This is Contact Agent...</h1> },
       { path: "*", element: <NotFound></NotFound> },
