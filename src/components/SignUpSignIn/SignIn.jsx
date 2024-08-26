@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Others from './Others';
 import { BiLogIn } from 'react-icons/bi';
+import { AuthContext } from '../providers/AuthProvider';
 
 const SignIn = () => {
+    const { userSignIn } = useContext(AuthContext);
+
     const handleSignInUser = e => {
         e.preventDefault();
 
@@ -13,6 +16,15 @@ const SignIn = () => {
         const password = form.get('password');
 
         console.log(email, password);
+
+        userSignIn(email, password)
+            .then(result => {
+                console.log(result.user);
+                // navigate after login
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
     return (
         <div className="my-0 sm:my-10 lg:w-1/2 xl:w-5/12 mx-auto">

@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useContext } from 'react';
 import Others from './Others';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../providers/AuthProvider';
 
 const SignUp = () => {
+    const { createUser } = useContext(AuthContext);
 
-    const handleSignUpUser = e =>{
+    const handleSignUpUser = e => {
         e.preventDefault();
         const name = e.target.name.value;
         const url = e.target.url.value;
@@ -13,6 +15,15 @@ const SignUp = () => {
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
         console.log(name, url, email, password, confirmPassword);
+
+        // create user
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.error(error)
+            })
     };
 
     return (
@@ -23,31 +34,31 @@ const SignUp = () => {
 
                 <form onSubmit={handleSignUpUser}>
                     <input name='name'
-                        type="text" placeholder="Name" 
+                        type="text" placeholder="Name"
                         // required
                         className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     />
 
                     <input name='url'
-                        type="url" placeholder="Enter your photo URL" 
+                        type="url" placeholder="Enter your photo URL"
                         // required
                         className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     />
 
                     <input name='email'
-                        type="email" placeholder="Email" 
+                        type="email" placeholder="Email"
                         // required
                         className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     />
 
                     <input name='password'
-                        type="password" placeholder="Password" 
+                        type="password" placeholder="Password"
                         // required
                         className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     />
 
                     <input name='confirmPassword'
-                        type="password" placeholder="Confirm Password" 
+                        type="password" placeholder="Confirm Password"
                         // required
                         className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     />

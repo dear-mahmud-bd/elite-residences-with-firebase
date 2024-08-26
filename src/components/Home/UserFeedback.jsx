@@ -7,7 +7,7 @@ const UserFeedback = () => {
         <div className="container mx-auto p-10 md:py-10 px-0 md:p-10 md:px-0">
             <p className="text-2xl md:text-4xl lg:text-5xl font-semibold capitalize text-headingColor relative before:absolute before:rounded-lg before:content before:w-[285px] md:before:w-[430px] lg:before:w-[570px] before:h-1 before:-bottom-2 before:left-0 before:bg-gradient-to-tr from-custom-green-dark to-custom-green-dark transition-all ease-in-out duration-100 mb-5">Give us your experience</p>
             <div className=" relative px-10 md:p-0 transform duration-500">
-                <img className="md:max-w-5xl" src="https://images.pexels.com/photos/5990153/pexels-photo-5990153.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1860" alt="" />
+                <img className="md:max-w-full" src="https://images.pexels.com/photos/5990153/pexels-photo-5990153.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1860" alt="" />
                 <div className="content bg-white md:bg-opacity-60 xl:bg-white p-2 pt-8 md:p-12 pb-12 md:max-w-lg w-full md:absolute top-20 right-5 rounded-xl shadow-2xl border-l-4 border-green-600">
                     <div className="flex items-center justify-center mt-8">
                         <form>

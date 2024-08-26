@@ -1,16 +1,30 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useContext } from 'react';
 import { CiLogin, CiLogout } from 'react-icons/ci';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../providers/AuthProvider';
 
 const Navbar = () => {
+    const { user, userSignOut } = useContext(AuthContext);
+    console.log(user);
+    
+    const handleSignOut = () => {
+        userSignOut()
+            .then(() => {
+                console.log('res');
+                // Sign-out successful.
+            }).catch((error) => {
+                console.log(error);
+                // An error happened.
+            });
+    };
+
     const addClass = isActive =>
         isActive ? 'bg-custom-green-light2 font-semibold underline underline-offset-2' : 'font-semibold';
     const navLinks = <>
         <li><NavLink className={({ isActive }) => addClass(isActive)} to="/">Home</NavLink></li>
         <li><NavLink className={({ isActive }) => addClass(isActive)} to="/estates">Estates</NavLink></li>
         <li><NavLink className={({ isActive }) => addClass(isActive)} to="/contact-agent">Contact Agent</NavLink></li>
-        <li><NavLink className={({ isActive }) => addClass(isActive)} to="/signup">Sign Up</NavLink></li>
     </>
 
     return (
@@ -35,20 +49,24 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
-                    <Link to='/signin' className="btn bg-custom-green-light hover:bg-custom-green-dark text-white font-semibold">
-                        Sign In<CiLogin className='text-2xl' />
-                    </Link>
-                    <div className="dropdown dropdown-hover dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-20 rounded-full ring ring-offset-2 ring-custom-green-light">
-                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Profile Img" />
+                    {
+                        user ?
+                            <div className="dropdown dropdown-hover dropdown-end">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-20 rounded-full ring ring-offset-2 ring-custom-green-light">
+                                        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Profile Img" />
+                                    </div>
+                                </div>
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt--2 w-52 p-2 shadow">
+                                    <li><a>Profile</a></li>
+                                    <li onClick={handleSignOut}><a> <CiLogout />Sign Out</a></li>
+                                </ul>
                             </div>
-                        </div>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt--2 w-52 p-2 shadow">
-                            <li><a>Profile</a></li>
-                            <li><a> <CiLogout />Sign Out</a></li>
-                        </ul>
-                    </div>
+                            :
+                            <Link to='/signin' className="btn bg-custom-green-light hover:bg-custom-green-dark text-white font-semibold">
+                                Sign In<CiLogin className='text-2xl' />
+                            </Link>
+                    }
 
                 </div>
             </div>
