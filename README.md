@@ -9,6 +9,6 @@
 - `Talwind CSS` and it's component library `daisyUI` are used to design the website.
 - Error handling for incorrect routing.
 - Use `firebase` for authentication and authorization.
-
+- To set dynamic title using `react-helmet`
 
 

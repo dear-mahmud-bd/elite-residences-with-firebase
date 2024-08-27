@@ -1,7 +1,19 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../providers/AuthProvider';
 
 const Others = () => {
+    const { userSignInWithGoogle } = useContext(AuthContext);
+
+    const handleGoogleSignIn = () => {
+        userSignInWithGoogle()
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
     return (
         <>
             <div className="mb-5 border-b text-center">
@@ -10,7 +22,7 @@ const Others = () => {
                 </div>
             </div>
             <div className="flex flex-col items-center mb-10">
-                <button
+                <button onClick={handleGoogleSignIn}
                     className="w-full max-w-md font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
                     <div className="bg-white p-2 rounded-full">
                         <svg className="w-4" viewBox="0 0 533.5 544.3">

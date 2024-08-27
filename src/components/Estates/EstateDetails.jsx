@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { IoLocationOutline, IoPricetagsOutline } from 'react-icons/io5';
 import { useLoaderData, useParams } from 'react-router-dom';
 
@@ -12,6 +13,9 @@ const EstateDetails = () => {
     if (!estate) {
         return (
             <div className="text-center flex flex-col items-center justify-center h-60 md:h-96">
+                <Helmet>
+                    <title>Estate Not Found</title>
+                </Helmet>
                 <h1 className="text-4xl font-bold text-red-600">Estate Not Found</h1>
                 <p className="text-lg font-semibold text-gray-600 mt-2">Sorry, the Estate you are looking for does not exist.</p>
             </div>
@@ -22,6 +26,10 @@ const EstateDetails = () => {
 
     return (
         <div>
+            <Helmet>
+                <title> Estates | {estate_title} </title>
+            </Helmet>
+
             <div className="hero">
                 <div className="hero-content flex-col md:flex-row">
                     <div className=' md:w-1/2'>
@@ -39,7 +47,7 @@ const EstateDetails = () => {
                                 ))}
                             </div>
                         </div>
-                        
+
                         <div className="flex gap-3 font-semibold mb-4">
                             <span className={`px-4 py-1 ${estate.status === 'sale' ? 'bg-custom-purple-light' : 'bg-custom-gold-light'} rounded-full text-gray-600`}>Status: {status}</span>
                             <span className={`px-4 py-1 ${estate.status === 'sale' ? 'bg-custom-purple-light' : 'bg-custom-gold-light'} rounded-full text-gray-600`}>Area: {new Intl.NumberFormat().format(area)} sq ft</span>

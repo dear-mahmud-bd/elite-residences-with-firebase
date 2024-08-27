@@ -11,11 +11,10 @@ const Navbar = () => {
     const handleSignOut = () => {
         userSignOut()
             .then(() => {
-                console.log('res');
-                // Sign-out successful.
-            }).catch((error) => {
-                console.log(error);
-                // An error happened.
+                console.log('Sign-out successful.');
+            })
+            .catch((error) => {
+                console.error('Error during sign-out:', error);
             });
     };
 
@@ -58,8 +57,31 @@ const Navbar = () => {
                                     </div>
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt--2 w-52 p-2 shadow">
-                                    <li><a>Profile</a></li>
-                                    <li onClick={handleSignOut}><a> <CiLogout />Sign Out</a></li>
+                                    <li>
+                                        <a>Profile</a>
+                                    </li>
+                                    <li onClick={() => document.getElementById('my_modal_1').showModal()}>
+                                        <a> <CiLogout />Sign Out</a>
+                                    </li>
+
+                                    {/* Modal for sign-out confirmation */}
+                                    <dialog id="my_modal_1" className="modal">
+                                        <div className="modal-box">
+                                            <h3 className="font-bold text-2xl">Sign Out</h3>
+                                            <p className="pt-4 text-lg">Are you sure you want to sign out ?</p>
+                                            <div className="modal-action">
+                                                <button className="btn bg-red-400 hover:bg-red-500 text-white px-5" onClick={() => {
+                                                    handleSignOut();
+                                                    document.getElementById('my_modal_1').close();
+                                                }}>
+                                                    Yes
+                                                </button>
+                                                <button className="btn bg-custom-green-light hover:bg-custom-green-dark text-white px-5" onClick={() => document.getElementById('my_modal_1').close()}>
+                                                    No
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </dialog>
                                 </ul>
                             </div>
                             :

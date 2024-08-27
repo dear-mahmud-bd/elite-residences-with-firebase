@@ -6,14 +6,19 @@ import useFetchEstates from '../../utility/useFetchEstates';
 import EstateCard from '../Estates/EstateCard';
 import { Link } from 'react-router-dom';
 import UserFeedback from './UserFeedback';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
     const { data: estatesData } = useFetchEstates('estatesData.json');
 
     return (
         <div>
+            <Helmet>
+                <title> Home </title>
+            </Helmet>
+
             <Banner></Banner>
-            
+
             {/* Our Story */}
             <div className='mt-10 '>
                 <h1 className='text-center text-4xl font-bold border-b-2 pb-2 mb-4'>Our Story</h1>
@@ -38,7 +43,7 @@ const Home = () => {
                     </Link>
                 </div>
             </div>
-            
+
             <UserFeedback></UserFeedback>
         </div>
     );

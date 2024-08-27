@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import Others from './Others';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
+import { Helmet } from 'react-helmet';
 
 const SignUp = () => {
     const { createUser } = useContext(AuthContext);
@@ -28,10 +29,13 @@ const SignUp = () => {
 
     return (
         <div className="my-0 sm:my-10 lg:w-1/2 xl:w-5/12 mx-auto">
+            <Helmet>
+            <meta charSet="utf-8" />
+                <title>Sign Up</title>
+            </Helmet>
+
             <h1 className="text-3xl xl:text-4xl font-extrabold text-center mb-5">Sign Up</h1>
-
             <div className="mx-auto max-w-md">
-
                 <form onSubmit={handleSignUpUser}>
                     <input name='name'
                         type="text" placeholder="Name"

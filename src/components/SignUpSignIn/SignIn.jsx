@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Others from './Others';
 import { BiLogIn } from 'react-icons/bi';
 import { AuthContext } from '../providers/AuthProvider';
+import { Helmet } from 'react-helmet';
 
 const SignIn = () => {
     const { userSignIn } = useContext(AuthContext);
@@ -28,6 +29,10 @@ const SignIn = () => {
     }
     return (
         <div className="my-0 sm:my-10 lg:w-1/2 xl:w-5/12 mx-auto">
+            <Helmet>
+            <meta charSet="utf-8" />
+                <title>Sign In</title>
+            </Helmet>
             <h1 className="text-3xl xl:text-4xl font-extrabold text-center mb-5">Sign In</h1>
 
             <div className="mx-auto max-w-md">
