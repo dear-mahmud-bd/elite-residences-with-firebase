@@ -4,9 +4,14 @@ import Others from './Others';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import { Helmet } from 'react-helmet';
+import useTogglePassword from '../../utility/useTogglePassword'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const SignUp = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, userUpdateProfile } = useContext(AuthContext);
+
+    const [passwordVisible, togglePasswordVisibility] = useTogglePassword();
+    const [confirmPasswordVisible, toggleConfirmPasswordVisibility] = useTogglePassword();
 
     const handleSignUpUser = e => {
         e.preventDefault();
@@ -17,10 +22,20 @@ const SignUp = () => {
         const confirmPassword = e.target.confirmPassword.value;
         console.log(name, url, email, password, confirmPassword);
 
+
+
+
         // create user
         createUser(email, password)
             .then(result => {
-                console.log(result.user)
+                const user = result.user;
+                userUpdateProfile(name, url)
+                    .then(() => {
+                        console.log("Account Created...")
+                    }).catch((error) => {
+                        // An error occurred
+                        console.log(error);
+                    });
             })
             .catch(error => {
                 console.error(error)
@@ -30,42 +45,42 @@ const SignUp = () => {
     return (
         <div className="my-0 sm:my-10 lg:w-1/2 xl:w-5/12 mx-auto">
             <Helmet>
-            <meta charSet="utf-8" />
+                <meta charSet="utf-8" />
                 <title>Sign Up</title>
             </Helmet>
 
             <h1 className="text-3xl xl:text-4xl font-extrabold text-center mb-5">Sign Up</h1>
             <div className="mx-auto max-w-md">
                 <form onSubmit={handleSignUpUser}>
-                    <input name='name'
-                        type="text" placeholder="Name"
-                        // required
+                    <input name='name' required type="text" placeholder="Name"
                         className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     />
 
-                    <input name='url'
-                        type="url" placeholder="Enter your photo URL"
-                        // required
+                    <input name='url' required type="url" placeholder="Enter your photo URL"
                         className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     />
 
-                    <input name='email'
-                        type="email" placeholder="Email"
-                        // required
+                    <input name='email' required type="email" placeholder="Email"
                         className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     />
 
-                    <input name='password'
-                        type="password" placeholder="Password"
-                        // required
-                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                    />
+                    <div className="relative">
+                        <input name="password" required type={passwordVisible ? "text" : "password"} placeholder="Password"
+                            className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                        />
+                        <span onClick={togglePasswordVisibility} className="absolute right-3 top-8 cursor-pointer text-3xl">
+                            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                        </span>
+                    </div>
 
-                    <input name='confirmPassword'
-                        type="password" placeholder="Confirm Password"
-                        // required
-                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                    />
+                    <div className="relative">
+                        <input name="confirmPassword" required type={confirmPasswordVisible ? "text" : "password"} placeholder="Confirm Password"
+                            className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                        />
+                        <span onClick={toggleConfirmPasswordVisibility} className="absolute right-3 top-8 cursor-pointer text-3xl">
+                            {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                        </span>
+                    </div>
 
                     <button
                         className="mt-5 tracking-wide font-semibold bg-custom-green-light text-gray-100 w-full py-4 rounded-lg hover:bg-custom-green-dark transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">

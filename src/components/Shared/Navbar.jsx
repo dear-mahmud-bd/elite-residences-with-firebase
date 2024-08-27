@@ -53,12 +53,15 @@ const Navbar = () => {
                             <div className="dropdown dropdown-hover dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                     <div className="w-20 rounded-full ring ring-offset-2 ring-custom-green-light">
-                                        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Profile Img" />
+                                        <img src={user?.photoURL} alt="Profile Img" />
                                     </div>
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt--2 w-52 p-2 shadow">
+                                    <li className=' font-semibold text-gray-500 mb-1'>
+                                        <p className='bg-custom-green-light2 hover:bg-custom-green-light2'>{user?.displayName}</p>
+                                    </li>
                                     <li>
-                                        <a>Profile</a>
+                                        <Link to='/profile'>Profile</Link>
                                     </li>
                                     <li onClick={() => document.getElementById('my_modal_1').showModal()}>
                                         <a> <CiLogout />Sign Out</a>

@@ -15,6 +15,7 @@ import NotFound from './components/Shared/NotFound.jsx';
 import SignUp from './components/SignUpSignIn/SignUp.jsx';
 import SignIn from './components/SignUpSignIn/SignIn.jsx';
 import AuthProvider from './components/providers/AuthProvider.jsx';
+import UserProfile from './components/SignUpSignIn/UserProfile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
 
       { path: "/signup", element: <SignUp></SignUp> },
       { path: "/signin", element: <SignIn></SignIn> },
+      { path: "/profile", element: <UserProfile></UserProfile> },
 
       { path: "/contact-agent", element: <h1>Hello This is Contact Agent...</h1> },
       { path: "*", element: <NotFound></NotFound> },
