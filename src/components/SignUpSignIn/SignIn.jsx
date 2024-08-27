@@ -20,6 +20,10 @@ const SignIn = () => {
         const password = form.get('password');
 
         console.log(email, password);
+        if(password.length<6){
+            console.log("al least 6 charecter");
+            return;
+        }
 
         userSignIn(email, password)
             .then(result => {
@@ -27,7 +31,7 @@ const SignIn = () => {
                 // navigate after login
             })
             .catch(error => {
-                console.error(error);
+                console.error(error.message);
             })
     }
     return (
@@ -47,6 +51,7 @@ const SignIn = () => {
 
                     <div className="relative">
                         <input
+                            required
                             name="password"
                             type={passwordVisible ? "text" : "password"}
                             placeholder="Password"
