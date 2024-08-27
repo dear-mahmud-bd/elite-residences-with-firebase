@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const usePasswordValidation = () => {
+const usePasswordValidation = () => {
     const message1 = '- Must have an uppercase letter in the password';
     const message2 = '- Must have a lowercase letter in the password';
     const message3 = '- Length must be at least 6 characters';
@@ -59,3 +59,5 @@ export const usePasswordValidation = () => {
         canSubmit
     };
 };
+
+export default usePasswordValidation;

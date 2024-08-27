@@ -2,9 +2,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { AuthContext } from '../providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const UserProfile = () => {
-    const { user, userUpdateProfile } = useContext(AuthContext);
+    const { user, loading, setUser, userUpdateProfile } = useContext(AuthContext);
 
 
     const [newName, setNewName] = useState(user?.displayName || '');
@@ -17,17 +18,38 @@ const UserProfile = () => {
 
     const handleUpdateProfile = e => {
         e.preventDefault();
-
         const form = new FormData(e.currentTarget);
         const newName = form.get('newName');
         const photoUrl = form.get('photoUrl');
 
         userUpdateProfile(newName, photoUrl)
             .then(() => {
-                console.log("Updated...")
+                setUser(prevUser => ({
+                    ...prevUser,
+                    displayName: newName,
+                    photoURL: photoUrl,
+                }));
+                toast.success('Account Update Successfully', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             }).catch((error) => {
-                // An error occurred
-                console.log(error);
+                toast.error('Something Wrong! Try Again', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             });
     };
 
@@ -62,9 +84,11 @@ const UserProfile = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Email</label>
-                                <input type="email" placeholder={user?.email} disabled className="input input-bordered w-full"/>
+                                <input type="email" placeholder={user?.email} disabled className="input input-bordered w-full" />
                             </div>
-                            <button className="btn bg-custom-green-light hover:bg-custom-green-dark text-white w-full mt-4">Update Profile</button>
+                            <button type="submit" className="btn bg-custom-green-light hover:bg-custom-green-dark text-white w-full mt-4" disabled={loading}>
+                                {loading ? 'Updating...' : 'Update Profile'}
+                            </button>
                         </form>
                     </div>
                 </div>

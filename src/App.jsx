@@ -4,6 +4,8 @@ import './App.css'
 import Navbar from './components/Shared/Navbar'
 import { Outlet } from 'react-router-dom'
 import Footer from './components/Shared/Footer'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -17,7 +19,7 @@ function App() {
           <div className="container max-w-7xl mx-auto p-4">
             <Outlet></Outlet>
           </div>
-          {/* <ToastContainer /> */}
+          <ToastContainer />
         </main>
 
         <footer className="mt-auto bg-custom-green-light w-full">

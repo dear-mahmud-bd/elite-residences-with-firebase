@@ -1,7 +1,15 @@
 /* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut,
+    updateProfile
+} from "firebase/auth";
 import auth from '../firebase/firebase.config';
 
 export const AuthContext = createContext(null);
@@ -9,27 +17,46 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
+
 
 
     const createUser = (email, password) => {
-        return createUserWithEmailAndPassword(auth, email, password);
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password)
+            .finally(() => setLoading(false)); // Stop loading after operation
     }
+
     const userSignIn = (email, password) => {
-        return signInWithEmailAndPassword(auth, email, password);
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password)
+            .finally(() => setLoading(false)); // Stop loading after operation
     }
+
     const userSignOut = () => {
-        return signOut(auth);
+        setLoading(true);
+        return signOut(auth)
+            .finally(() => setLoading(false)); // Stop loading after operation
     }
 
     const userSignInWithGoogle = () => {
-        return signInWithPopup(auth, googleProvider);
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider)
+            .finally(() => setLoading(false)); // Stop loading after operation
     }
 
     const userUpdateProfile = (name, photoURL) => {
+        setLoading(true);
         return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: photoURL,
-        });
+        }).then(() => {
+            setUser(prevUser => ({
+                ...prevUser,
+                displayName: name,
+                photoURL: photoURL,
+            }));
+        }).finally(() => setLoading(false)); // Stop loading after operation
     };
 
     useEffect(() => {
@@ -45,6 +72,8 @@ const AuthProvider = ({ children }) => {
 
     const authInfo = {
         user,
+        loading,
+        setUser,
         createUser,
         userSignIn,
         userSignOut,

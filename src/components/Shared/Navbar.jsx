@@ -1,20 +1,42 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import { CiLogin, CiLogout } from 'react-icons/ci';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
     const { user, userSignOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     console.log(user);
-    
+
     const handleSignOut = () => {
         userSignOut()
             .then(() => {
-                console.log('Sign-out successful.');
+                toast.success('Sign-out successful', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                navigate('/');
             })
             .catch((error) => {
-                console.error('Error during sign-out:', error);
+                toast.success('Sign-out unsuccessful', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             });
     };
 

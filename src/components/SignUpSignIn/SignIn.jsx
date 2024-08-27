@@ -1,15 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Others from './Others';
 import { BiLogIn } from 'react-icons/bi';
 import { AuthContext } from '../providers/AuthProvider';
 import { Helmet } from 'react-helmet';
 import useTogglePassword from '../../utility/useTogglePassword';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
     const { userSignIn } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [passwordVisible, togglePasswordVisibility] = useTogglePassword();
 
     const handleSignInUser = e => {
@@ -21,17 +23,44 @@ const SignIn = () => {
 
         console.log(email, password);
         if(password.length<6){
-            console.log("al least 6 charecter");
+            toast.error('Invalied Email and Password', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
 
         userSignIn(email, password)
-            .then(result => {
-                console.log(result.user);
-                // navigate after login
+            .then(() => {
+                toast.success('Sign In Successfully', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                navigate('/profile');
             })
             .catch(error => {
-                console.error(error.message);
+                toast.error('Invalied Email and Password', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             })
     }
     return (

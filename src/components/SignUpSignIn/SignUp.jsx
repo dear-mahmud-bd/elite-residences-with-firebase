@@ -1,15 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
 import Others from './Others';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 import { Helmet } from 'react-helmet';
 import useTogglePassword from '../../utility/useTogglePassword'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import usePasswordValidation from '../../utility/usePassValidation';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
     const { createUser, userUpdateProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const [passwordVisible, togglePasswordVisibility] = useTogglePassword();
     const [confirmPasswordVisible, toggleConfirmPasswordVisibility] = useTogglePassword();
@@ -29,6 +31,8 @@ const SignUp = () => {
         canSubmit
     } = usePasswordValidation();
 
+
+
     const handleSignUpUser = e => {
         e.preventDefault();
         const name = e.target.name.value;
@@ -36,23 +40,73 @@ const SignUp = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
-        console.log(name, url, email, password, confirmPassword);
-        
+        // console.log(name, url, email, password, confirmPassword);
+
         // create user
-        // createUser(email, password)
-        //     .then(result => {
-        //         const user = result.user;
-        //         userUpdateProfile(name, url)
-        //             .then(() => {
-        //                 console.log("Account Created...")
-        //             }).catch((error) => {
-        //                 // An error occurred
-        //                 console.log(error);
-        //             });
-        //     })
-        //     .catch(error => {
-        //         console.error(error)
-        //     })
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                userUpdateProfile(name, url)
+                    .then(() => {
+                        toast.success('Profile Updated', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        });
+                    }).catch((error) => {
+                        toast.warn('Profile Not Updated', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        });
+                    });
+                toast.success('Account Create Successfully', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                navigate('/profile');
+            })
+            .catch(error => {
+                if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
+                    toast.error('Email already in use. ', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                } else {
+                    toast.error('Something Wrong! Try Again', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                }
+            })
     };
 
     return (
