@@ -56,8 +56,7 @@ const UserProfile = () => {
             </Helmet>
 
             <div className="container mx-auto p-4">
-                <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
-
+                <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden animate__animated animate__fadeInDown">
                     <div className="md:w-1/2 p-6 flex justify-center items-center bg-gray-100">
                         <div className='flex flex-col items-center'>
                             <img src={user?.photoURL} alt="User Profile" className="w-32 h-32 rounded-full shadow-md" />

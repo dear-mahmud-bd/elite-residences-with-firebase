@@ -23,8 +23,8 @@ const AllEstates = () => {
                 <title> Estates </title>
             </Helmet>
             {isLoading ? (
-                <div className="flex justify-center items-center h-screen">
-                    <p className="loading loading-bars loading-lg text-custom-green-dark"></p>
+                <div className='flex justify-center my-20'>
+                    <p className="loading loading-bars loading-lg text-custom-green-dark"> </p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-2">

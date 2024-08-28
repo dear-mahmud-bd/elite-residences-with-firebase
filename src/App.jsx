@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom'
 import Footer from './components/Shared/Footer'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import 'animate.css';
 
 function App() {
   return (

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { IoLocationOutline, IoPricetagsOutline } from 'react-icons/io5';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { Link, useLoaderData, useParams } from 'react-router-dom';
 
 const EstateDetails = () => {
     const estates = useLoaderData();
@@ -30,7 +30,7 @@ const EstateDetails = () => {
                 <title> Estates | {estate_title} </title>
             </Helmet>
 
-            <div className="hero">
+            <div className="hero animate__animated animate__fadeIn">
                 <div className="hero-content flex-col md:flex-row">
                     <div className=' md:w-1/2'>
                         <h2 className="text-4xl font-bold mb-2">{estate_title}</h2>
@@ -61,7 +61,7 @@ const EstateDetails = () => {
                         <div className="flex items-center justify-between font-semibold">
                             <span className={`px-4 py-1 ${estate.status === 'sale' ? 'bg-custom-purple-light' : 'bg-custom-gold-light'} rounded-full text-gray-600`}>AP Number: {apertmentCode}</span>
                             <button className="btn bg-custom-green-light hover:bg-custom-green-dark text-white font-semibold rounded-full">
-                                <span className="text-lg">Contact Agent</span>
+                                <Link to='/contact-agent'><span className="text-lg">Contact Agent</span></Link>
                             </button>
                         </div>
                     </div>

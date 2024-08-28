@@ -9,7 +9,7 @@ const ContactAgent = () => {
     const { user } = useContext(AuthContext);
     const { data: estatesData } = useFetchEstates('estatesData.json');
 
-    const handleContactAgent = e =>{
+    const handleContactAgent = e => {
         e.preventDefault();
         e.currentTarget.reset();
         toast.success('We Received Your Request', {
@@ -95,11 +95,11 @@ const ContactAgent = () => {
                         <div className="md:flex md:space-x-4">
                             <div className="flex flex-col space-y-2 md:w-1/2">
                                 <label htmlFor="name" className="font-medium text-gray-700">Name</label>
-                                <input type="text" className="w-full px-4 py-2 border rounded-md" placeholder={user.displayName} disabled />
+                                <input type="text" placeholder={user.displayName} disabled={user?.displayName} className="w-full px-4 py-2 border rounded-md" />
                             </div>
                             <div className="flex flex-col space-y-2 md:w-1/2">
                                 <label htmlFor="email" className="font-medium text-gray-700">Email</label>
-                                <input type="email" className="w-full px-4 py-2 border rounded-md" placeholder={user.email} disabled />
+                                <input type="email" placeholder={user.email} disabled={user?.email} className="w-full px-4 py-2 border rounded-md" />
                             </div>
                         </div>
 
