@@ -17,32 +17,32 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
 
 
     const createUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
-            .finally(() => setLoading(false)); // Stop loading after operation
+            .finally(() => setLoading(false)); 
     }
 
     const userSignIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password)
-            .finally(() => setLoading(false)); // Stop loading after operation
+            .finally(() => setLoading(false)); 
     }
 
     const userSignOut = () => {
         setLoading(true);
         return signOut(auth)
-            .finally(() => setLoading(false)); // Stop loading after operation
+            .finally(() => setLoading(false)); 
     }
 
     const userSignInWithGoogle = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider)
-            .finally(() => setLoading(false)); // Stop loading after operation
+            .finally(() => setLoading(false)); 
     }
 
     const userUpdateProfile = (name, photoURL) => {
@@ -56,13 +56,14 @@ const AuthProvider = ({ children }) => {
                 displayName: name,
                 photoURL: photoURL,
             }));
-        }).finally(() => setLoading(false)); // Stop loading after operation
+        }).finally(() => setLoading(false)); 
     };
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             // console.log('User Auth State Changed', currentUser);
             setUser(currentUser);
+            setLoading(false);
         });
         return () => {
             unSubscribe();

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Others from './Others';
 import { BiLogIn } from 'react-icons/bi';
 import { AuthContext } from '../providers/AuthProvider';
@@ -11,7 +11,11 @@ import { toast } from 'react-toastify';
 
 const SignIn = () => {
     const { userSignIn } = useContext(AuthContext);
+
     const navigate = useNavigate();
+    const location = useLocation();
+    // console.log('Before SignIn: ', location?.state);
+
     const [passwordVisible, togglePasswordVisibility] = useTogglePassword();
 
     const handleSignInUser = e => {
@@ -20,8 +24,7 @@ const SignIn = () => {
         const form = new FormData(e.currentTarget);
         const email = form.get('email');
         const password = form.get('password');
-
-        console.log(email, password);
+        
         if(password.length<6){
             toast.error('Invalied Email and Password', {
                 position: "top-right",
@@ -48,7 +51,7 @@ const SignIn = () => {
                     progress: undefined,
                     theme: "light",
                 });
-                navigate('/profile');
+                navigate(location?.state ? location.state : '/profile');
             })
             .catch(error => {
                 toast.error('Invalied Email and Password', {

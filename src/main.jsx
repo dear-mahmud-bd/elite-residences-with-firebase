@@ -17,6 +17,7 @@ import SignIn from './components/SignUpSignIn/SignIn.jsx';
 import AuthProvider from './components/providers/AuthProvider.jsx';
 import UserProfile from './components/SignUpSignIn/UserProfile.jsx';
 import ContactAgent from './components/ContactAgent/ContactAgent.jsx';
+import PrivateRoute from './components/routes/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,13 +26,15 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home></Home> },
       { path: "/estates", element: <AllEstates></AllEstates>, loader: fetchEstatesData },
-      { path: "/estates/:id", element: <EstateDetails></EstateDetails>, loader: fetchEstatesData },
-
+      
       { path: "/signup", element: <SignUp></SignUp> },
       { path: "/signin", element: <SignIn></SignIn> },
-      { path: "/profile", element: <UserProfile></UserProfile> },
 
-      { path: "/contact-agent", element: <ContactAgent></ContactAgent> },
+      // Private Route
+      { path: "/profile", element: <PrivateRoute> <UserProfile></UserProfile> </PrivateRoute> },
+      { path: "/estates/:id", element: <PrivateRoute> <EstateDetails></EstateDetails> </PrivateRoute>, loader: fetchEstatesData },
+      { path: "/contact-agent", element: <PrivateRoute> <ContactAgent></ContactAgent> </PrivateRoute> },
+
       { path: "*", element: <NotFound></NotFound> },
     ],
   },
