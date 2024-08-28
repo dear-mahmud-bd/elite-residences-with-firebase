@@ -8,37 +8,22 @@ import { Helmet } from 'react-helmet';
 import useTogglePassword from '../../utility/useTogglePassword';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
 
 const SignIn = () => {
     const { userSignIn } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
-    // console.log('Before SignIn: ', location?.state);
 
     const [passwordVisible, togglePasswordVisibility] = useTogglePassword();
 
-    const handleSignInUser = e => {
-        e.preventDefault();
+    // Initialize useForm
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
-        const form = new FormData(e.currentTarget);
-        const email = form.get('email');
-        const password = form.get('password');
-        
-        if(password.length<6){
-            toast.error('Invalied Email and Password', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
-            return;
-        }
 
+    const onSubmit = (formData) => {
+        const { email, password } = formData;
         userSignIn(email, password)
             .then(() => {
                 toast.success('Sign In Successfully', {
@@ -53,8 +38,8 @@ const SignIn = () => {
                 });
                 navigate(location?.state ? location.state : '/profile');
             })
-            .catch(error => {
-                toast.error('Invalied Email and Password', {
+            .catch(() => {
+                toast.error('Invalid Email or Password', {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -64,8 +49,9 @@ const SignIn = () => {
                     progress: undefined,
                     theme: "light",
                 });
-            })
-    }
+            });
+    };
+
     return (
         <div className="my-0 sm:my-10 lg:w-1/2 xl:w-5/12 mx-auto">
             <Helmet>
@@ -76,38 +62,40 @@ const SignIn = () => {
 
             <div className="mx-auto max-w-md">
 
-                <form onSubmit={handleSignInUser}>
-                    <input name='email' type="email" placeholder="Email" required
-                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                    />
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <input
+                        {...register('email', {
+                            required: "Email is required",
+                            pattern: {
+                                value: /^\S+@\S+$/i, message: "Invalid email address"
+                            }
+                        })} type="email" placeholder="Email" className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" />
+                    {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
 
                     <div className="relative">
                         <input
-                            required
-                            name="password"
-                            type={passwordVisible ? "text" : "password"}
-                            placeholder="Password"
-                            className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                        />
+                            {...register('password', {
+                                required: "Password is required",
+                                minLength: { value: 6, message: "Password must be at least 6 characters long" }
+                            })} type={passwordVisible ? "text" : "password"} placeholder="Password" className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5" />
                         <span onClick={togglePasswordVisibility} className="absolute right-3 top-8 cursor-pointer text-3xl">
                             {passwordVisible ? <FaEyeSlash /> : <FaEye />}
                         </span>
                     </div>
+                    {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
 
-                    <button type='submit'
-                        className="mt-5 tracking-wide font-semibold bg-custom-green-light text-gray-100 w-full py-4 rounded-lg hover:bg-custom-green-dark transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                        <BiLogIn className='text-2xl'></BiLogIn>
-                        <span className="ml-3">
-                            Sign In
-                        </span>
+                    <button type='submit' className="mt-5 tracking-wide font-semibold bg-custom-green-light text-gray-100 w-full py-4 rounded-lg hover:bg-custom-green-dark transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                        <BiLogIn className='text-2xl' />
+                        <span className="ml-3"> Sign In </span>
                     </button>
                 </form>
+
                 <p className="mt-5 text-xs text-gray-600 text-center ">
-                    Don&apos;t have an account ? <Link to='/signup' className="border-b border-gray-500">Sign Up</Link>
+                    Don&apos;t have an account? <Link to='/signup' className="border-b border-gray-500">Sign Up</Link>
                 </p>
             </div>
 
-            <Others></Others>
+            <Others />
         </div>
     );
 };

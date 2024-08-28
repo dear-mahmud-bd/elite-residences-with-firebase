@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from 'react';
-import Others from './Others';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { AuthContext } from '../providers/AuthProvider';
 import { Helmet } from 'react-helmet';
-import useTogglePassword from '../../utility/useTogglePassword'
+import useTogglePassword from '../../utility/useTogglePassword';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import usePasswordValidation from '../../utility/usePassValidation';
 import { toast } from 'react-toastify';
+import Others from './Others';
 
 const SignUp = () => {
     const { createUser, userUpdateProfile } = useContext(AuthContext);
@@ -16,32 +16,16 @@ const SignUp = () => {
     const [passwordVisible, togglePasswordVisibility] = useTogglePassword();
     const [confirmPasswordVisible, toggleConfirmPasswordVisibility] = useTogglePassword();
 
-    // password verification...
     const {
-        password,
-        errors,
-        isTouched,
-        handleValidatePassword,
-        handlePasswordFocus,
-        confirmPassword,
-        confirmErrors,
-        confirmIsTouched,
-        handleValidateConfirmPass,
-        handleConfirmFocus,
-        canSubmit
-    } = usePasswordValidation();
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm();
+    const password = watch('password');
 
-
-
-    const handleSignUpUser = e => {
-        e.preventDefault();
-        const name = e.target.name.value;
-        const url = e.target.url.value;
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        const confirmPassword = e.target.confirmPassword.value;
-        // console.log(name, url, email, password, confirmPassword);
-
+    const onSubmit = (formData) => {
+        const { name, url, email, password } = formData;
         // create user
         createUser(email, password)
             .then(result => {
@@ -58,7 +42,7 @@ const SignUp = () => {
                             progress: undefined,
                             theme: "light",
                         });
-                    }).catch((error) => {
+                    }).catch(() => {
                         toast.warn('Profile Not Updated', {
                             position: "top-right",
                             autoClose: 5000,
@@ -70,7 +54,7 @@ const SignUp = () => {
                             theme: "light",
                         });
                     });
-                toast.success('Account Create Successfully', {
+                toast.success('Account Created Successfully', {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -95,7 +79,7 @@ const SignUp = () => {
                         theme: "light",
                     });
                 } else {
-                    toast.error('Something Wrong! Try Again', {
+                    toast.error('Something went wrong! Try again.', {
                         position: "top-right",
                         autoClose: 5000,
                         hideProgressBar: false,
@@ -106,7 +90,7 @@ const SignUp = () => {
                         theme: "light",
                     });
                 }
-            })
+            });
     };
 
     return (
@@ -118,85 +102,74 @@ const SignUp = () => {
 
             <h1 className="text-3xl xl:text-4xl font-extrabold text-center mb-5">Sign Up</h1>
             <div className="mx-auto max-w-md">
-                <form onSubmit={handleSignUpUser}>
-                    <input name='name' required type="text" placeholder="Name"
-                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <input
+                        {...register('name', { required: true })}
+                        type="text" placeholder="Name" className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     />
+                    {errors.name && <p className="text-red-500 text-sm">Name is required.</p>}
 
-                    <input name='url' required type="url" placeholder="Enter your photo URL"
-                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                    <input
+                        {...register('url', { required: true })}
+                        type="url" placeholder="Enter your photo URL" className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     />
+                    {errors.url && <p className="text-red-500 text-sm">Photo URL is required.</p>}
 
-                    <input name='email' required type="email" placeholder="Email"
-                        className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                    <input
+                        {...register('email', { 
+                            required: true, 
+                            pattern: /^\S+@\S+$/i 
+                        })} type="email" placeholder="Email" className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     />
+                    {errors.email && <p className="text-red-500 text-sm">Valid email is required.</p>}
 
-                    {/* Password Input */}
+                    {/* Password */}
                     <div className="relative">
                         <input
-                            name="password"
-                            required
-                            type={passwordVisible ? "text" : "password"}
-                            placeholder="Password"
-                            className={`w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border ${isTouched && errors.length ? 'border-red-500' : 'border-gray-200'} placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5`}
-
-                            value={password}
-                            onChange={(e) => handleValidatePassword(e.target.value)}
-                            onFocus={handlePasswordFocus}
+                            {...register('password', {
+                                required: true,
+                                minLength: {
+                                    value: 6, message: 'Password must be at least 6 characters',
+                                },
+                                validate: {
+                                    hasUpperCase: (value) => /[A-Z]/.test(value) || 'Password must have an uppercase letter',
+                                    hasLowerCase: (value) => /[a-z]/.test(value) || 'Password must have a lowercase letter',
+                                },
+                            })} type={passwordVisible ? "text" : "password"} placeholder="Password" className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                         />
                         <span onClick={togglePasswordVisibility} className="absolute right-3 top-8 cursor-pointer text-3xl">
                             {passwordVisible ? <FaEyeSlash /> : <FaEye />}
                         </span>
                     </div>
-                    <div>
-                        {isTouched && errors.map((error, index) => (
-                            <p key={index} className="text-red-500 text-sm">{error}</p>
-                        ))}
-                    </div>
+                    {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
 
-                    {/* Confirm Password Input */}
+                    {/* Confirm Password */}
                     <div className="relative">
                         <input
-                            name="confirmPassword"
-                            required
-                            type={confirmPasswordVisible ? "text" : "password"}
-                            placeholder="Confirm Password"
-                            className={`w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border ${confirmIsTouched && confirmErrors.length ? 'border-red-500' : 'border-gray-200'} placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5`}
-                            value={confirmPassword}
-                            onChange={(e) => handleValidateConfirmPass(e.target.value)}
-                            onFocus={handleConfirmFocus}
-                        />
+                            {...register('confirmPassword', {
+                                required: true,
+                                validate: (value) => value === password || 'Passwords do not match',
+                            })} type={confirmPasswordVisible ? "text" : "password"} placeholder="Confirm Password" className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5" />
                         <span onClick={toggleConfirmPasswordVisibility} className="absolute right-3 top-8 cursor-pointer text-3xl">
                             {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
                         </span>
                     </div>
-                    <div>
-                        {confirmIsTouched && confirmErrors.map((error, index) => (
-                            <p key={index} className="text-red-500 text-sm">{error}</p>
-                        ))}
-                    </div>
+                    {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>}
 
-                    <button disabled={!canSubmit()}
-                        className={`${!canSubmit() ? 'cursor-not-allowed' : 'cursor-pointer'} mt-5 tracking-wide font-semibold bg-custom-green-light text-gray-100 w-full py-4 rounded-lg hover:bg-custom-green-dark transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none`}>
-                        <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" strokeWidth="2"
-                            strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                            <circle cx="8.5" cy="7" r="4" />
-                            <path d="M20 8v6M23 11h-6" />
+                    <button className="mt-5 tracking-wide font-semibold bg-custom-green-light text-gray-100 w-full py-4 rounded-lg hover:bg-custom-green-dark transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" >
+                        <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/> <circle cx="8.5" cy="7" r="4"/> <path d="M20 8v6M23 11h-6"/>
                         </svg>
-                        <span className="ml-3">
-                            Sign Up
-                        </span>
+                        <span className="ml-3"> Sign Up </span>
                     </button>
                 </form>
 
-
-                <p className="mt-5 text-xs text-gray-600 text-center ">
-                    Already have an account ? <Link to='/signin' className="border-b border-gray-500">Sign In</Link>
+                <p className="mt-5 text-xs text-gray-600 text-center">
+                    Already have an account? <Link to='/signin' className="border-b border-gray-500">Sign In</Link>
                 </p>
             </div>
 
-            <Others></Others>
+            <Others />
         </div>
     );
 };

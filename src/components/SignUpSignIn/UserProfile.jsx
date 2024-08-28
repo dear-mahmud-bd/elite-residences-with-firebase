@@ -1,26 +1,22 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { useForm } from 'react-hook-form';
 import { AuthContext } from '../providers/AuthProvider';
 import { toast } from 'react-toastify';
 
 const UserProfile = () => {
     const { user, loading, setUser, userUpdateProfile } = useContext(AuthContext);
 
-
-    const [newName, setNewName] = useState(user?.displayName || '');
-    const [photoUrl, setPhotoUrl] = useState(user?.photoURL || '');
+    const { register, handleSubmit, setValue } = useForm();
     useEffect(() => {
-        setNewName(user?.displayName || '');
-        setPhotoUrl(user?.photoURL || '');
-    }, [user]);
+        // Set default values when the user changes
+        setValue('newName', user?.displayName || '');
+        setValue('photoUrl', user?.photoURL || '');
+    }, [user, setValue]);
 
-
-    const handleUpdateProfile = e => {
-        e.preventDefault();
-        const form = new FormData(e.currentTarget);
-        const newName = form.get('newName');
-        const photoUrl = form.get('photoUrl');
+    const handleUpdateProfile = (formData) => {
+        const { newName, photoUrl } = formData;
 
         userUpdateProfile(newName, photoUrl)
             .then(() => {
@@ -29,7 +25,7 @@ const UserProfile = () => {
                     displayName: newName,
                     photoURL: photoUrl,
                 }));
-                toast.success('Account Update Successfully', {
+                toast.success('Account Updated Successfully', {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -40,7 +36,7 @@ const UserProfile = () => {
                     theme: "light",
                 });
             }).catch((error) => {
-                toast.error('Something Wrong! Try Again', {
+                toast.error('Something Went Wrong! Try Again', {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -61,7 +57,7 @@ const UserProfile = () => {
 
             <div className="container mx-auto p-4">
                 <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
-                    {/* Left Side: User Info */}
+
                     <div className="md:w-1/2 p-6 flex justify-center items-center bg-gray-100">
                         <div className='flex flex-col items-center'>
                             <img src={user?.photoURL} alt="User Profile" className="w-32 h-32 rounded-full shadow-md" />
@@ -70,17 +66,20 @@ const UserProfile = () => {
                         </div>
                     </div>
 
-                    {/* Right Side: Update Profile Form */}
+                    {/* Update Profile Form */}
                     <div className="md:w-1/2 p-6">
                         <h3 className="text-xl font-semibold mb-4">Update Profile</h3>
-                        <form onSubmit={handleUpdateProfile} className="space-y-4">
+
+                        <form onSubmit={handleSubmit(handleUpdateProfile)} className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">New Name</label>
-                                <input value={newName} onChange={(e) => setNewName(e.target.value)} required name='newName' type="text" className="input input-bordered w-full" placeholder="Enter your name" />
+                                <input {...register('newName', { required: true })}
+                                    type="text" className="input input-bordered w-full" placeholder="Enter your name" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">New Photo URL</label>
-                                <input value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} required name='photoUrl' type="url" className="input input-bordered w-full" placeholder="Enter your photo URL" />
+                                <input {...register('photoUrl', { required: true })}
+                                    type="url" className="input input-bordered w-full" placeholder="Enter your photo URL" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Email</label>
@@ -90,10 +89,10 @@ const UserProfile = () => {
                                 {loading ? 'Updating...' : 'Update Profile'}
                             </button>
                         </form>
+
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };
